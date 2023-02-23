@@ -17,30 +17,8 @@ library(hrbrthemes)
 library(mice)
 library(FactoMineR)
 library(glmm)
+
 final_birth_1<-read.csv("finaldata.csv")
-
-final_birth_tract<-read.csv("census_tract/finaldata.csv")
-final_birth_tract<-final_birth_tract[,c("ID","NDVI","water","cdd","noise","pm_mean")]
-final_birth_1<-merge(final_birth_1,final_birth_tract,by="ID")
-
-comp_env<-final_birth_1[,c("ID","water","block_pm","NDVI")]
-row.names(comp_env)<-comp_env$ID
-comp_env<-comp_env[,-1]
-comp_env_1 <- comp_env[complete.cases(comp_env),]
-comp_env_1$NDVI<--comp_env_1$NDVI
-
-pc <- prcomp(comp_env_1,
-             center = TRUE,
-             scale. = TRUE)
-pc$rotation
-pc_1_env<-as.data.frame(pc[["x"]][,1])
-colnames(pc_1_env)<-"env_score_3"
-final_birth_1<-merge(final_birth_1,pc_1_env,by.x="ID",by.y="row.names",all.x=TRUE)
-final_birth_1$env_score_3<--final_birth_1$env_score_3
-
-cor.test(final_birth_1$n_ses_score,final_birth_1$env_score_3, method="pearson")
-
-final_birth_1$index_prenatal<-ifelse(is.na(final_birth_1$index_prenatal),"0",final_birth_1$index_prenatal)
 
 #Subset into White vs Black
 final_birth_bw<-final_birth_1[which(final_birth_1$PGB_MULTIRACE_116==1|final_birth_1$PGB_MULTIRACE_116==2),] #change here
