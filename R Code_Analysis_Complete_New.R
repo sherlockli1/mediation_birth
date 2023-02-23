@@ -1,3 +1,11 @@
+##################################################################################################################
+# Code used to conduct analyses for "Contributions of the social and physical environments to racial and ethnic  #
+# disparities in birth outcomes in Los Angeles County from 2017 to 2019                                          #
+# Analytic approach developed by: Sherlock Li                                                                    #
+# Code by: Sherlock Li                                                                                           #
+# Last Update: 2/23/2023                                                                                         #
+##################################################################################################################
+
 require(haven)
 library("dplyr")
 library(tidyr)
